@@ -18,4 +18,4 @@ CREATE TABLE IF NOT EXISTS `tblStudents` (
   `first_name` varchar(128) DEFAULT NULL,
   `last_name` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`student_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
