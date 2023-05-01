@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS `tblFeedback` (
 CREATE TABLE IF NOT EXISTS `tblScores` (
   `student_id` int(11) NOT NULL,
   `score` int(11) DEFAULT NULL,
-  `used_phone` int(11) DEFAULT NULL,
+  `used_phone` varchar(12) DEFAULT NULL,
   PRIMARY KEY (`student_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
