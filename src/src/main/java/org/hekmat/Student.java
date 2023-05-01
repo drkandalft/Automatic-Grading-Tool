@@ -1,10 +1,17 @@
 package org.hekmat;
+import org.hekmat.table.Block;
+import org.hekmat.table.Board;
+import org.hekmat.table.Table;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Student {
-    private final String DB_URL = "jdbc:mysql://127.0.0.1:3306/admin_hekmat?useLegacyDatetimeCode=false&serverTimezone=America/Los_Angeles";
+    private final String DB_URL = "jdbc:mysql://199.80.55.99:3306/admin_hekmat?useLegacyDatetimeCode=false&serverTimezone=America/Los_Angeles";
     private final String DB_USER = "admin_hekmat";
-    private final String DB_PASSWORD = "12345678";
+    private final String DB_PASSWORD = "8d8120df";
     private Connection con;
     private Statement stmt;
     public  Student(){
@@ -109,19 +116,29 @@ public class Student {
     }
 
     public void GetStudents(){
+        List<String> headersList = Arrays.asList("id", "Student", "Score", "FeedBack");
+        List<List<String>> rowsList = new ArrayList<>();
         ResultSet rs;
         try {
             rs = this.stmt.executeQuery("SELECT st.*, sc.`score`, sf.`note` FROM `tblStudents` st LEFT JOIN `tblScores` sc ON sc.`student_id` = st.`student_id` LEFT JOIN `tblFeedback` sf ON sf.`student_id` = st.`student_id`;");
-            System.out.println("\n------------------------------------------------");
-            System.out.println("id\t|\tStudent\t\t|\tScore\t|\tFeedBack");
-            System.out.println("------------------------------------------------");
             while (rs.next()) {
-                System.out.println(rs.getInt(1) + "\t|\t" + rs.getString(2) + " " + rs.getString(3) + "\t|\t" + rs.getString(4) + "\t|\t" + rs.getString(5));
+                rowsList.add(Arrays.asList(rs.getString(1), rs.getString(2) + " " + rs.getString(3), rs.getString(4), rs.getString(5)));
             }
-            System.out.println("------------------------------------------------");
         } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
         }
+        Board board = new Board(95);
+        Table table = new Table(board, 85, headersList, rowsList);
+        List<Integer> colWidthsListEdited = Arrays.asList(3, 22, 7, 58);
+        table.setGridMode(Table.GRID_FULL).setColWidthsList(colWidthsListEdited);
+        List<Integer> colAlignList = Arrays.asList(
+                Block.DATA_CENTER,
+                Block.DATA_MIDDLE_LEFT,
+                Block.DATA_CENTER,
+                Block.DATA_MIDDLE_LEFT);
+        table.setColAlignsList(colAlignList);
+        String tableString = board.setInitialBlock(table.tableToBlocks()).build().getPreview();
+        System.out.println(tableString);
     }
 
     public boolean SetScore(int student_id, int score){
