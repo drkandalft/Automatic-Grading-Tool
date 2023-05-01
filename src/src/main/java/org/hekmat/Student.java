@@ -9,9 +9,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Student {
-    private final String DB_URL = "jdbc:mysql://199.80.55.99:3306/admin_hekmat?useLegacyDatetimeCode=false&serverTimezone=America/Los_Angeles";
+    private final String DB_URL = "jdbc:mysql://127.0.0.1:3306/admin_hekmat?useLegacyDatetimeCode=false&serverTimezone=America/Los_Angeles";
     private final String DB_USER = "admin_hekmat";
-    private final String DB_PASSWORD = "8d8120df";
+    private final String DB_PASSWORD = "12345678";
     private Connection con;
     private Statement stmt;
     public  Student(){
