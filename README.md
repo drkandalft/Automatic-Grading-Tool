@@ -12,7 +12,6 @@ To use the Automatic Grading Tool, simply download the JAR file application “h
 #### **/getstudent** - Get student info by student id
 #### **/update** - Checking student work
 #### **/addstudent** - Add new student
-#### **/editstudent** - Edit student
 #### **/delstudent** - Delete student
 #### **/clear** - Clear scores
 The tool can then automatically grade the assignments and generate feedback and scores for each student, which can be accessed by the instructor using this application.
